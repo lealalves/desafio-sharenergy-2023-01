@@ -1,5 +1,4 @@
 const mongoose = require('../database/')
-
 const userSchema = mongoose.Schema({
   username: {
     required: true,
