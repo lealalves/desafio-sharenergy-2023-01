@@ -7,6 +7,20 @@ router.post('/login', async (req, res) => {
 
   const { username, password, keepLogin } = req.body
 
+  let errors = []
+
+  if(!username) {
+    errors.push({message: 'Please enter a valid user'})
+  }
+
+  if(!password){
+    errors.push({message: 'Please enter the password'})
+  }
+
+  if(errors.length > 0){
+    return res.send({error: true, errors})
+  }
+
   const user = await userModel.findOne({username})
 
   if(!user) {
