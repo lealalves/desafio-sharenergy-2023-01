@@ -4,7 +4,8 @@ const router = express.Router()
 const userModel = require('../models/User')
 
 router.post('/login', async (req, res) => {
-  const { username, password } = req.body
+
+  const { username, password, keepLogin } = req.body
 
   const user = await userModel.findOne({username})
 
@@ -15,8 +16,12 @@ router.post('/login', async (req, res) => {
   if(password !== user.password){
     return res.status(401).send({error: true, message: 'Wrong password'})
   }
+  
+  if(keepLogin){
+    console.log('manter');
+    req.session.isLogged = true
+  }
 
-  req.isLogged = true
   res.status(200).send(user)
 
 })
