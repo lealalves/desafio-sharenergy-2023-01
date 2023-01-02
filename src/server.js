@@ -3,6 +3,7 @@ const app = express()
 const session = require('express-session')
 
 const authController = require('./controller/authController')
+const servicesController = require('./controller/servicesController')
 
 app.use(session({
   secret: 'keyboard cat', 
@@ -18,6 +19,7 @@ app.use(session({
 app.use(express.json())
 
 app.use('/auth', authController)
+app.use('/services', servicesController)
 
 app.use((req, res, next) => {
   if(!req.session.isLogged){
