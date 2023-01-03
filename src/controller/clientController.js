@@ -63,16 +63,16 @@ router.post('/register', async (req, res) => {
 
 })
 
-router.delete('/delete', async (req, res) => {
-  const email = req.body.email
+router.delete('/delete/:id', async (req, res) => {
+  const clientId = req.params.id
 
-  if(!await clientModel.findOne({email})){
+  if(!await clientModel.findById(clientId)){
     return res.status(422).send({error: true, message: 'Client not found'})
   }
 
-  clientModel.deleteOne({email})
+  clientModel.findByIdAndDelete(clientId)
   .then(result => {
-    res.status(200).send({error: false, message: 'Client deleted successfully', result})
+    res.status(200).send({error: false, message: 'Client deleted successfully'})
   })
   .catch(err => {
     console.log(err);
