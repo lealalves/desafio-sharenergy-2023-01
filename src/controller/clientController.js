@@ -63,7 +63,7 @@ router.post('/register', async (req, res) => {
 
 })
 
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   const clientId = req.params.id
 
   if(!await clientModel.findById(clientId)){
@@ -79,5 +79,9 @@ router.delete('/delete/:id', async (req, res) => {
     res.status(500).send({error: true, message: 'Error on delete client'})
   })
 })
+
+// router.patch('/:id', async(req, res) => {
+
+// })
 
 module.exports = router
