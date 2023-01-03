@@ -80,8 +80,20 @@ router.delete('/:id', async (req, res) => {
   })
 })
 
-// router.patch('/:id', async(req, res) => {
+router.patch('/:id', async(req, res) => {
+  const clientId = req.params.id
 
-// })
+  if(!await clientModel.findById(clientId)){
+    return res.status(422).send({error: true, message: 'Client not found'})
+  }
+
+  clientModel.findByIdAndUpdate(clientId, req.body)
+  .then(result => {
+    res.status(200).send({error: false, message: 'Client updated successfully'})
+  })
+  .catch(err => {
+    res.status(500).send({error: true, message: 'Error on try update'})
+  })
+})
 
 module.exports = router
