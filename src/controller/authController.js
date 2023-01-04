@@ -32,7 +32,6 @@ router.post('/login', async (req, res) => {
   }
   
   if(keepLogin){
-    console.log('manter');
     req.session.isLogged = true
   }
 

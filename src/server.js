@@ -25,7 +25,7 @@ app.use('/client', clientController)
 
 app.use((req, res, next) => {
   if(!req.session.isLogged){
-    return console.log('pls loggin');
+    return res.send('login')
   }
   next()
 })
