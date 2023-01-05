@@ -19,26 +19,25 @@ app.use(session({
   resave: false, 
   saveUninitialized: true, 
   cookie: { 
-    maxAge: 60000,
     secure: false
    }
 }))
 
 app.use(express.json())
 
+const isLogged = (req, res, next) =>{
+  if(!req.session.data){
+    return res.send({error: true, message: 'need login'})
+  }
+  next()
+}
+
 app.use('/auth', authController)
 app.use('/services', servicesController)
 app.use('/client', clientController)
 
-app.use((req, res, next) => {
-  if(!req.session.isLogged){
-    return res.send({message: 'need login'})
-  }
-  next()
-})
-
-app.get('/', (req, res) => {
-  res.send({message: 'Home'})
+app.get('/', isLogged, (req, res) => {
+  res.send({message: 'Home', user: req.session.data})
 })
 
 app.listen(3000, () => {
