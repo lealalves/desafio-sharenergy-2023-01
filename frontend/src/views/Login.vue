@@ -1,31 +1,3 @@
-<script setup>
-
-
-const login = async () => {
-  const data = {
-    username: this.username,
-    password: this.password,
-    keepLogin: true
-  }
-
-  const req = fetch('http://localhost:3000/auth/login', {
-    method: 'POST',
-    credentials: 'include',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  })
-
-  const res = await (await req).json()
-
-}
-
-// const test = async () => {
-//   const test = await (await fetch('http://localhost:3000', {credentials: 'include'})).json()
-//   console.log(test);
-// }
-
-</script>
-
 <template>
   <main>
     <div id="container-login">
@@ -33,9 +5,9 @@ const login = async () => {
       <Input @custom-change="this.username = $event" type="email" placeholder="Usuário" />
       <Input @custom-change="this.password = $event" type="password" placeholder="Senha" />
       <div class="div-keeplogin">
-        Remember me? <input type="checkbox" name="keeplogin" id="keeplogin">
+        Remember me? <input v-model="keepLogin" type="checkbox" name="keeplogin" id="keeplogin">
       </div>
-      <Button text="Sign in" />
+      <Button @click="login()" text="Sign in" />
     </div>
   </main>
 </template>
@@ -48,7 +20,6 @@ const login = async () => {
   padding: 30px;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   /* background-color: red; */
   width: min(350px, 65vw);
   height: min(350px, 65vh);
@@ -56,12 +27,13 @@ const login = async () => {
 
 .div-keeplogin{
   display: flex;
-  width: 100%;
+  width: 11.5em;
   align-items: center;
   margin-bottom: 15px;
 }
 .div-keeplogin input{
   margin-left: 5px;
+  border: none;
 }
 </style>
 <script>
@@ -71,8 +43,9 @@ import Input from '../components/Input.vue'
 export default {
   data() {
     return {
-      username: '',
-      password: ''
+      username: 'desafiosharenergy', // salvei diretamente o usuário/senha para facilitar testes
+      password: 'sh@r3n3rgy',
+      keepLogin: false
     }
   },
   components: {
@@ -80,8 +53,28 @@ export default {
     Button
   },
   methods: {
-    test() {
-      console.log(this.username);
+   async login() {
+      const data = {
+        username: this.username,
+        password: this.password,
+        keepLogin: this.keepLogin
+      }
+
+      const req = fetch('http://localhost:3000/auth/login', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+
+      const res = await (await req).json()
+
+      if(res.error){
+        return console.log(res);
+      }
+
+      this.$router.push({name: 'home'})
+
     }
   }
 }
