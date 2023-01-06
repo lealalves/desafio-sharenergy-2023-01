@@ -5,6 +5,7 @@
 <style scoped>
 .button {
   background-color: transparent;
+  border-radius: 10px;
   color: white;
   padding: 10px;
   border: 1px solid whitesmoke;
