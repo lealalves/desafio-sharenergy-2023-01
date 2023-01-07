@@ -1,12 +1,26 @@
 @import './base.css';
 
+.VuePagination nav{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.VuePagination nav ul{
+  display: flex;
+  justify-content: center;
+}
+.VuePagination nav ul li{
+  padding: 10px;
+}
+.VuePagination{
+  display: flex;
+  justify-content: center;
+}
+
 a,
 .green {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
 }
-
 ul, li{
   list-style: none;
   margin: 0;
@@ -16,12 +30,5 @@ ul, li{
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
   }
 }
