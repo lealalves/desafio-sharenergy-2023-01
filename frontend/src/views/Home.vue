@@ -24,6 +24,7 @@ isLogged()
 	<main>
     <div id="container-home">
       <Header />
+      <h1>Home</h1>
       <div id="container-usuarios">
 				<div id="search-inputs">
 					<Input :value="searchInput" @custom-change="this.searchInput = $event" type="text" placeholder="Pesquisar usuário" />
@@ -54,7 +55,6 @@ isLogged()
   flex-direction: column;
   width: 100vw;
   height: 100vh;
-  color: #f5f5f5;
   align-items: center;
 }
 #container-usuarios{
@@ -62,6 +62,7 @@ isLogged()
   padding: 10px;
   width: 80%;
   height: 80%;
+  color: #f5f5f5;
 }
 #card{
   /* background-color: #333; */
@@ -74,7 +75,7 @@ isLogged()
 }
 #card img{
   border: 2px solid #000;
-  width: 70px;
+  width: 20vw;
   border-radius: 10px;
 }
 #search-inputs{
@@ -84,6 +85,18 @@ isLogged()
 }
 #search-inputs button{
 	margin-bottom: 10px;
+}
+
+@media (min-width: 768px){
+  #card{
+    flex-direction: initial;
+  }
+  #card img{
+    width: 10vw;
+  }
+  #card ul{
+    margin-left: 10px;
+  }
 }
 </style>
 <script>
@@ -124,10 +137,10 @@ export default {
 		},
 		search(){
 			let search = this.userList.filter(({email, login, name}) => 
-      email.toUpperCase().indexOf(this.searchInput.toUpperCase()) > -1 || 
-			login.username.toUpperCase().indexOf(this.searchInput.toUpperCase()) > -1 || 
-			name.first.toUpperCase().indexOf(this.searchInput.toUpperCase()) > -1 || 
-			name.last.toUpperCase().indexOf(this.searchInput.toUpperCase()) > -1)
+        email.toUpperCase().indexOf(this.searchInput.toUpperCase()) > -1 || 
+        login.username.toUpperCase().indexOf(this.searchInput.toUpperCase()) > -1 || 
+        name.first.toUpperCase().indexOf(this.searchInput.toUpperCase()) > -1 || 
+        name.last.toUpperCase().indexOf(this.searchInput.toUpperCase()) > -1)
 			
 			this.searchUserList = search
 		},
