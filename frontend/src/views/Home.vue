@@ -142,6 +142,7 @@ export default {
         name.first.toUpperCase().indexOf(this.searchInput.toUpperCase()) > -1 || 
         name.last.toUpperCase().indexOf(this.searchInput.toUpperCase()) > -1)
 			
+      this.page = 1
 			this.searchUserList = search
 		},
     async getUsers(){
