@@ -3,10 +3,10 @@
         <nav>
           <img id="img-logo" src="../../assets/logo.jpg" alt="Logo"/>
           <ul id="desktop-menu">
-            <li>Home</li>
-            <li>HTTP Cat</li>
-            <li>Dogs</li>
-            <li>Clientes</li>
+            <Router-link to="/home"><li>Home</li></Router-link>
+            <Router-link to="/httpcat"><li>HTTP Cat</li></Router-link>
+            <Router-link to="/dogs"><li>Dogs</li></Router-link>
+            <Router-link to="/home"><li>Clientes</li></Router-link>
           </ul>  
           <Dropdown id="mobile-menu" :items="header"/>
         </nav>
@@ -17,7 +17,6 @@
   display: none;
 }
 #img-logo{
-  border: 1px solid #000;
   width: min(70px, 12vw);
   border-radius: 10px;
 }
@@ -25,7 +24,7 @@ header{
   display: flex;
   padding: 15px;
   width: 100%;
-  background-color: tomato;
+  background-color: #111;
   margin-bottom: 30px;
 }
 nav{
@@ -73,12 +72,12 @@ export default {
 				},
 				{
 					title: 'HTTP Cat',
-					url: '/home/httpcat',
+					url: '/httpcat',
 					is: 'router-link',
 				},
 				{
 					title: 'Dogs',
-					url: '/home',
+					url: '/dogs',
 					is: 'router-link',
 				},
 				{
