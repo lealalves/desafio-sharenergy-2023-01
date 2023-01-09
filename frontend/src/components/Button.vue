@@ -9,6 +9,7 @@
   color: white;
   padding: 10px;
   border: 1px solid whitesmoke;
+  cursor: pointer;
 }
 </style>
 
