@@ -4,8 +4,9 @@
       <Header />
       <h1>Random DOG</h1>
       <p>Aperte o botão para que apareça um cachorro!</p>
-      <Button @click="searchDog()" text="Refresh"/>      
-      <img v-show="dogImg" :src="dogImg" alt="Dog" id="dog_img">
+      <Button @click="searchDog()" text="Refresh"/> 
+      <p v-show="!dogLoaded && dogImg !== ''">Carregando a foto do doguinho, calma!!</p>
+      <img @load="dogLoaded = true" v-show="dogImg" :src="dogImg" alt="Dog" id="dog_img">
     </div>
 	</main>
 </template>
@@ -38,11 +39,16 @@ export default {
   },
   data(){
     return {
-      dogImg: ''
+      dogImg: '',
+      dogLoaded: false
     }
   },
   methods: {
+    teste(){
+      console.log('carrego');
+    },
     async searchDog(){
+      this.dogLoaded = false
       const req = fetch('http://localhost:3000/services/randomdog')
       const res = (await (await req).json()).url
 
