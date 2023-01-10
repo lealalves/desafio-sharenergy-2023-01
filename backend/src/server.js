@@ -37,7 +37,7 @@ app.use('/services', servicesController)
 app.use('/client', clientController)
 
 app.get('/', isLogged, (req, res) => {
-  res.send({message: 'Home', user: req.session.data})
+  res.send({message: 'Home', user: req.session.data, keepLogin: req.session.keepLogin})
 })
 
 app.listen(3000, () => {

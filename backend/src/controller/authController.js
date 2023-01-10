@@ -31,8 +31,8 @@ router.post('/login', async (req, res) => {
     return res.status(401).send({error: true, message: 'Wrong password'})
   }
   
-  if(!keepLogin){
-    req.session.cookie.maxAge = 5000
+  if(keepLogin){
+    req.session.keepLogin = true
   }
 
   req.session.data = user
