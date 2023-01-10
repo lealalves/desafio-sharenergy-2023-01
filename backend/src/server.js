@@ -15,7 +15,7 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 app.use(session({
-  secret: 'keyboard cat', 
+  secret: 'segredo secreto', 
   resave: false, 
   saveUninitialized: true, 
   cookie: { 
@@ -25,7 +25,7 @@ app.use(session({
 
 app.use(express.json())
 
-const isLogged = (req, res, next) =>{
+const isAuth = (req, res, next) =>{
   if(!req.session.data){
     return res.send({error: true, message: 'need login'})
   }
@@ -36,7 +36,7 @@ app.use('/auth', authController)
 app.use('/services', servicesController)
 app.use('/client', clientController)
 
-app.get('/', isLogged, (req, res) => {
+app.get('/', isAuth, (req, res) => {
   res.send({message: 'Home', user: req.session.data, keepLogin: req.session.keepLogin})
 })
 
