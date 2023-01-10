@@ -3,7 +3,7 @@
     <div id="container-dog">
       <Header />
       <h1>Random DOG</h1>
-      <p>Aperte o botão para que apareça um cachorro!</p>
+      <p>Aperte o botão para que apareça um cachorro aleatório!</p>
       <Button @click="searchDog()" text="Refresh"/> 
       <p v-show="!dogLoaded && dogImg !== ''">Carregando a foto do doguinho, calma!!</p>
       <img @load="dogLoaded = true" v-show="dogImg" :src="dogImg" alt="Dog" id="dog_img">
@@ -50,12 +50,12 @@ export default {
     async searchDog(){
       this.dogLoaded = false
       const req = fetch('http://localhost:3000/services/randomdog')
-      const res = (await (await req).json()).url
+      const res = await (await req).json()
 
-      if(res.split('.')[2] == 'mp4' || res.split('.')[2] == 'gif'){
+      if(res.url.split('.')[2] == 'mp4' || res.url.split('.')[2] == 'gif'){
         return this.searchDog()
       }
-      this.dogImg = res
+      this.dogImg = res.url
     }
   }
 }
