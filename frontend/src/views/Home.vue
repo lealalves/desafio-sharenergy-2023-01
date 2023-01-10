@@ -34,7 +34,7 @@ isLogged()
         <div id="card" v-for="user in displayedUsers" >
           <img :src="user.picture.large" alt="Profile photo">
           <ul>
-            <li>Nome completo: {{ `${user.name.first}  ${user.name.last}`  }}</li>
+            <li>Nome completo: {{ `${user.name.first}  ${user.name.last}` }}</li>
             <li>E-mail: {{ user.email }}</li>
             <li>Username: {{ user.login.username }}</li>
             <li>Idade: {{ user.dob.age }}</li>

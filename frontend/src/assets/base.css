@@ -65,6 +65,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   color: var(--color-text);
+  overflow-x: hidden;
   background: var(--color-background);
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
