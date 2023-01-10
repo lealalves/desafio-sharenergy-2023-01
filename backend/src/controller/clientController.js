@@ -16,7 +16,7 @@ router.post('/register', async (req, res) => {
     errors.push({message: 'Por favor insira um nome'})
   }
 
-  if(nome?.length < 3){
+  if(nome !== '' && nome?.length < 3){
     errors.push({message: 'Nome muito curto'})
   }
 
@@ -28,7 +28,7 @@ router.post('/register', async (req, res) => {
     errors.push({message: 'Por favor insira um email'})
   }
 
-  if(email?.length <= 2){
+  if(email !== '' && email?.length <= 2){
     errors.push({message: 'E-mail muito curto'})
   }
 
@@ -36,7 +36,7 @@ router.post('/register', async (req, res) => {
     errors.push({message: 'Por favor insira um telefone'})
   }
 
-  if(telefone?.length <= 7){
+  if(telefone !== '' && telefone?.length <= 7){
     errors.push({message: 'Telefone inválido'})
   }
 
@@ -94,7 +94,7 @@ router.patch('/:id', async(req, res) => {
     errors.push({message: 'Por favor insira um nome'})
   }
 
-  if(nome?.length < 3){
+  if(nome !== '' && nome?.length < 3){
     errors.push({message: 'Nome muito curto'})
   }
 
@@ -106,7 +106,7 @@ router.patch('/:id', async(req, res) => {
     errors.push({message: 'Por favor insira um email'})
   }
 
-  if(email?.length <= 2){
+  if(email !== '' && email?.length <= 2){
     errors.push({message: 'E-mail muito curto'})
   }
 
@@ -114,7 +114,7 @@ router.patch('/:id', async(req, res) => {
     errors.push({message: 'Por favor insira um telefone'})
   }
 
-  if(telefone?.length <= 7){
+  if(telefone !== '' && telefone?.length <= 7){
     errors.push({message: 'Telefone inválido'})
   }
 
