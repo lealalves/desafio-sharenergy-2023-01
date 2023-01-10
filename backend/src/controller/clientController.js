@@ -27,9 +27,9 @@ router.post('/register', async (req, res) => {
   if(!email){
     errors.push({message: 'Por favor insira um email'})
   }
-
-  if(email !== '' && email?.length <= 2){
-    errors.push({message: 'E-mail muito curto'})
+  
+  if(email !== '' && !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
+    errors.push({message: 'E-mail inválido'})
   }
 
   if(!telefone){
@@ -106,8 +106,8 @@ router.patch('/:id', async(req, res) => {
     errors.push({message: 'Por favor insira um email'})
   }
 
-  if(email !== '' && email?.length <= 2){
-    errors.push({message: 'E-mail muito curto'})
+  if(email !== '' && !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
+    errors.push({message: 'E-mail inválido'})
   }
 
   if(!telefone){
