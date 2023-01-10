@@ -1,16 +1,16 @@
 <template>
   <header>
-        <nav>
-          <img id="img-logo" src="../../assets/logo.jpg" alt="Logo"/>
-          <ul id="desktop-menu">
-            <Router-link to="/home"><li>Home</li></Router-link>
-            <Router-link to="/httpcat"><li>HTTP Cat</li></Router-link>
-            <Router-link to="/dogs"><li>Dogs</li></Router-link>
-            <Router-link to="/home"><li>Clientes</li></Router-link>
-          </ul>  
-          <Dropdown id="mobile-menu" :items="header"/>
-        </nav>
-      </header>
+    <nav>
+      <img id="img-logo" src="../../assets/logo.jpg" alt="Logo"/>
+      <ul id="desktop-menu">
+        <Router-link to="/home"><li>Home</li></Router-link>
+        <Router-link to="/httpcat"><li>HTTP Cat</li></Router-link>
+        <Router-link to="/dogs"><li>Dogs</li></Router-link>
+        <Router-link to="/clientes"><li>Clientes</li></Router-link>
+      </ul>  
+      <Dropdown id="mobile-menu" :items="header"/>
+    </nav>
+    </header>
 </template>
 <style scoped>
 #mobile-menu{

@@ -1,25 +1,3 @@
-<script setup>
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-
-const isLogged = async() => {
-  const req = fetch('http://localhost:3000', {
-    credentials: 'include'
-  })
-  
-  const res = await (await req).json()
-
-  if(res.error){
-    console.log(res);
-    return router.push({name: 'login'})
-  }
-
-}
-
-isLogged()
-</script>
-
 <template>
 	<main>
     <div id="container-home">
@@ -50,7 +28,6 @@ isLogged()
 
 <style scoped>
 #container-home{
-  /* background-color: tomato; */
   display: flex;
   flex-direction: column;
   width: 100vw;
@@ -58,18 +35,19 @@ isLogged()
   align-items: center;
 }
 #container-usuarios{
-  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 10px;
-  width: 80%;
-  height: 80%;
+  width: 50%;
   color: #f5f5f5;
 }
 #card{
-  /* background-color: #333; */
   display: flex;
   flex-direction: column;
   border: 1px solid #f5f5f5;
   border-radius: 10px;
+  width: 70vw;
   padding: 10px;
   margin-bottom: 30px;
 }
@@ -80,6 +58,7 @@ isLogged()
 }
 #search-inputs{
 	display: flex;
+  width: min(300px, 60vw);
 	flex-direction: column;
 	margin-bottom: 30px;
 }
@@ -107,7 +86,8 @@ import Button from '../components/Button.vue';
 export default {
   components:{
     Input,
-		Button
+		Button,
+    Header
   },
   data(){
     return{
