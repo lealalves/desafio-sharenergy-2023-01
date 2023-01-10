@@ -82,7 +82,7 @@ export default {
 				},
 				{
 					title: 'Clientes',
-					url: '/home',
+					url: '/clientes',
 					is: 'router-link',
 				},
 			]
