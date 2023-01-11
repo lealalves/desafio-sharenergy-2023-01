@@ -9,19 +9,15 @@
 #container-mensagem{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  height: 7vw;
-  margin-bottom: 10px;
-  color: #adff2f;
+  align-items: right;
+  height: 15px;
+  color: #999;
+  margin-bottom: 5px;
 }
 </style>
 <script>
 export default {
   name: 'Message',
   props: ['msg'],
-  data(){
-    return {
-    }
-  }
 }
 </script>

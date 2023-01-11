@@ -11,6 +11,10 @@
   border: 1px solid whitesmoke;
   cursor: pointer;
 }
+.button:active{
+  color: #222;
+  background-color: #f5f5f5;
+}
 </style>
 
 <script>
