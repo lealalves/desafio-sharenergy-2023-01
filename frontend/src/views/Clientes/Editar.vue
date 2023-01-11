@@ -100,7 +100,7 @@ export default {
       const res = await (await req).json()
 
       if(res.error){
-        return this.displayMsg.push({error: res.message});
+        return this.displayMsg = res.errors;
       }
 
       this.displayMsg.push({message: res.message})
