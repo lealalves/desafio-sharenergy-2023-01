@@ -24,11 +24,11 @@ router.post('/login', async (req, res) => {
   const user = await userModel.findOne({username})
 
   if(!user) {
-    return res.status(404).send({error: true, message: 'Usuário não encontrado.'})
+    return res.status(404).send({error: true, errors: [{message: 'Usuário não encontrado.'}]})
   }
 
   if(password !== user.password){
-    return res.status(401).send({error: true, message: 'Senha incorreta.'})
+    return res.status(401).send({error: true, errors: [{message: 'Senha incorreta.'}]})
   }
   
   if(keepLogin){

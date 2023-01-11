@@ -7,25 +7,25 @@ router.post('/register', async (req, res) => {
   const { nome, endereco, cpf, telefone, email } = req.body
 
   if(await clientModel.findOne({email})){
-    return res.status(422).send({error: true, message: 'Este e-mail já está sendo usado.'})
+    return res.status(422).send({error: true, errors: [{message: 'Este e-mail já está sendo usado.'}]})
   }
 
   let errors = []
 
   if(!nome){
-    errors.push({message: 'Por favor insira um nome'})
+    errors.push({message: 'Por favor, insira um nome.'})
   }
 
   if(nome !== '' && nome?.length < 3){
-    errors.push({message: 'Nome muito curto'})
+    errors.push({message: 'Nome muito curto.'})
   }
 
   if(!endereco){
-    errors.push({message: 'Por favor insira um endereço'})
+    errors.push({message: 'Por favor, insira um endereço.'})
   }
 
   if(!email){
-    errors.push({message: 'Por favor insira um email'})
+    errors.push({message: 'Por favor, insira um e-mail.'})
   }
   
   if(email !== '' && !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
@@ -33,19 +33,19 @@ router.post('/register', async (req, res) => {
   }
 
   if(!telefone){
-    errors.push({message: 'Por favor insira um telefone'})
+    errors.push({message: 'Por favor, insira um telefone.'})
   }
 
   if(telefone !== '' && telefone?.length <= 7){
-    errors.push({message: 'Telefone inválido'})
+    errors.push({message: 'Telefone inválido.'})
   }
 
   if(!cpf){
-    errors.push({message: 'Por favor insira um cpf'})
+    errors.push({message: 'Por favor, insira um cpf.'})
   }
 
-  if(cpf?.length < 11){
-    errors.push({message: 'Cpf inválido'})
+  if(cpf !== '' & cpf?.length < 11){
+    errors.push({message: 'Cpf inválido.'})
   }
 
   if(errors.length > 0){
@@ -91,39 +91,39 @@ router.patch('/:id', async(req, res) => {
   let errors = []
 
   if(!nome){
-    errors.push({message: 'Por favor insira um nome'})
+    errors.push({message: 'Por favor, insira um nome.'})
   }
 
   if(nome !== '' && nome?.length < 3){
-    errors.push({message: 'Nome muito curto'})
+    errors.push({message: 'Nome muito curto.'})
   }
 
   if(!endereco){
-    errors.push({message: 'Por favor insira um endereço'})
+    errors.push({message: 'Por favor, insira um endereço.'})
   }
 
   if(!email){
-    errors.push({message: 'Por favor insira um email'})
+    errors.push({message: 'Por favor, insira um e-mail.'})
   }
 
   if(email !== '' && !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
-    errors.push({message: 'E-mail inválido'})
+    errors.push({message: 'E-mail inválido.'})
   }
 
   if(!telefone){
-    errors.push({message: 'Por favor insira um telefone'})
+    errors.push({message: 'Por favor, insira um telefone.'})
   }
 
   if(telefone !== '' && telefone?.length <= 7){
-    errors.push({message: 'Telefone inválido'})
+    errors.push({message: 'Telefone inválido.'})
   }
 
   if(!cpf){
-    errors.push({message: 'Por favor insira um cpf'})
+    errors.push({message: 'Por favor insira um cpf.'})
   }
 
-  if(cpf?.length < 11){
-    errors.push({message: 'Cpf inválido'})
+  if(cpf !== '' && cpf?.length < 11){
+    errors.push({message: 'Cpf inválido.'})
   }
 
   if(errors.length > 0){
@@ -147,7 +147,7 @@ router.get('/:id?', (req, res) => {
       if(!result) return res.status(422).send({error: true, message: 'Cliente não encontrado.'})
       res.status(200).send({error: false, result})
     })
-    .catch(err => res.status(500).send({error: true, message: 'Erro ao requisitar cliente'}))
+    .catch(err => res.status(500).send({error: true, message: 'Erro ao requisitar cliente.'}))
   }
 
   clientModel.find()
@@ -155,7 +155,7 @@ router.get('/:id?', (req, res) => {
     res.status(200).send({error: false, result})
   })
   .catch(err => {
-    res.status(500).send({error: true, message: 'Erro ao requisitar clientes'})
+    res.status(500).send({error: true, message: 'Erro ao requisitar clientes.'})
   })
   
 })
