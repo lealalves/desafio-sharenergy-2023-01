@@ -11,3 +11,7 @@ npm run dev</i>
 npm install <br>
 cd src <br>
 nodemon server.js</i>
+
+# video no youtube
+
+https://www.youtube.com/watch?v=fdVFW8kCtaU
