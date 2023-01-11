@@ -3,7 +3,6 @@
     <div id="container-clientes">
       <Header />
       <Button @click="this.$router.push({name: 'clientes'})" text="Voltar"/>
-      <Message v-for="msg in displayMsg" :msg="msg.message"/>
       <div id="container-inputs">
         <Input class="cadastro-input" @custom-change="this.nome = $event" type="text" placeholder="Nome" :value="nome" />
         <Input class="cadastro-input" @custom-change="this.email = $event" type="email" placeholder="Email" :value="email" />
@@ -11,6 +10,7 @@
         <Input class="cadastro-input" @custom-change="this.endereco = $event" type="text" placeholder="Endereço" :value="endereco" />
         <Input class="cadastro-input" @custom-change="this.cpf = $event" type="number" placeholder="CPF" :value="cpf" />
         <Button @click="editClient(this.$router.currentRoute.value.params.id)" text="Editar"/>
+        <Message v-for="msg in displayMsg" :msg="msg.message"/>
       </div>
     </div>
 	</main>
@@ -73,7 +73,7 @@ export default {
       const res = await (await req).json()
       
       if(res.error){
-        return console.log(res);
+        return this.displayMsg.push({error: res.message});
       }
 
       this.email = res.result.email
@@ -81,7 +81,6 @@ export default {
       this.endereco = res.result.endereco
       this.cpf = res.result.cpf
       this.telefone = res.result.telefone
-      console.log(res);
 
     },
     async editClient(id){
@@ -101,10 +100,12 @@ export default {
       const res = await (await req).json()
 
       if(res.error){
-        return this.displayMsg = res.errors;
+        return this.displayMsg.push({error: res.message});
       }
 
-      this.$router.push({name: 'clientes', query: {mensagem: res.message}})
+      this.displayMsg.push({message: res.message})
+
+      setTimeout(() => {this.$router.push({name: 'clientes'})}, 2000)
 
 
     }

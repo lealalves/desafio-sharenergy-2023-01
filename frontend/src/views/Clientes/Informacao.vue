@@ -6,9 +6,11 @@
       <div id="card-clientes">
         <h1>{{ nome }}</h1>
         <h3>{{ email }}</h3>
-        <h4>CPF: {{ cpf }}</h4>
-        <h4>Endereço: {{ endereco }}</h4>
-        <h4>Telefone: {{ telefone }}</h4>
+        <div id="info-cliente">
+          <span><h4 class="info-name">CPF: </h4><h4>{{ cpf }}</h4></span>
+          <span><h4 class="info-name">Telefone: </h4><h4>{{ telefone }}</h4></span>
+          <span><h4 class="info-name">Endereço: </h4><h4>{{ endereco }}</h4></span>        
+        </div>
         <RouterLink :to="`/clientes/editar/${id}`"><Button text="Editar"/></RouterLink>
       </div>
     </div>
@@ -27,10 +29,26 @@
   border-radius: 10px;
   padding: 20px;
   margin-top: 20px;
-  width: min(400px,80vw);
+  width: min(600px,95vw);
 }
-button{
-  margin: 10px;
+#card-clientes button{
+  width: 100%;
+  margin-top: 10px;
+}
+#card-clientes span{
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 50%;
+}
+#card-clientes h1{
+  color: #fff;
+}
+#info-cliente{
+  margin-top: 20px;
+}
+.info-name{
+  color: #fff;
+  margin-right: 5px;
 }
 </style>
 <script>

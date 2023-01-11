@@ -27,15 +27,18 @@
 #container-clientes p{
   margin-top: 40px
 }
+#container-clientes button{
+  margin-top: 10px;
+}
 #card-clientes{
   border: 1px solid whitesmoke;
   border-radius: 10px;
   padding: 20px;
   margin-top: 20px;
-  width: min(400px,70vw);
+  width: min(400px,85vw);
 }
 #card-clientes button{
-  margin: 10px;
+  margin: 20px 20px 10px 0px;
 }
 
 </style>
@@ -65,20 +68,22 @@ export default {
       const res = await (await req).json()
 
       if(res.error){
-        return console.log(res);
+        return this.displayMsg.push({error: res.message});
       }
 
-      this.displayMsg = res.message
-
+      this.displayMsg = res.message;
+        setTimeout(() => {
+          this.displayMsg = ''
+        }, 2000)
+      
       this.getClients()
-
     },
     async getClients(){
       const req = fetch('http://localhost:3000/client')
       const res = await (await req).json()
 
       if(res.error){
-        return console.log(res);
+        return this.displayMsg.push({error: res.message});
       }
 
       this.clientList = res.result
