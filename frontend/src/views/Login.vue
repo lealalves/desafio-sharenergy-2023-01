@@ -1,5 +1,6 @@
 <template>
   <main>
+    <Message v-for="msg in displayMsg" :msg="msg.message"/><br>
     <div id="container-login">
       <h1 class="login-title">Login</h1>
       <Input @custom-change="this.username = $event" type="email" placeholder="Usuário" />
@@ -20,7 +21,6 @@
   padding: 30px;
   flex-direction: column;
   justify-content: center;
-  /* background-color: red; */
   width: min(350px, 65vw);
   height: min(350px, 65vh);
 }
@@ -39,18 +39,21 @@
 <script>
 import Button from '../components/Button.vue';
 import Input from '../components/Input.vue'
+import Message from '../components/Message.vue'
 
 export default {
   data() {
     return {
-      username: 'desafiosharenergy', // salvei diretamente o usuário/senha para facilitar testes
-      password: 'sh@r3n3rgy',
+      displayMsg: [],
+      username: '', 
+      password: '',
       keepLogin: false
     }
   },
   components: {
     Input,
-    Button
+    Button,
+    Message
   },
   methods: {
    async login() {
@@ -70,7 +73,7 @@ export default {
       const res = await (await req).json()
 
       if(res.error){
-        return console.log(res);
+        return this.displayMsg = res.errors;
       }
 
       this.$router.push({name: 'home'})

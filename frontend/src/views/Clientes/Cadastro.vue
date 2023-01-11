@@ -3,15 +3,15 @@
     <div id="container-clientes">
       <Header />
       <Button @click="this.$router.push({name: 'clientes'})" text="Voltar"/>
-      <p>Cadastre um cliente.</p>
-      <Message v-for="msg in displayMsg" :msg="msg.message"/>
+      <p>Cadastre um cliente:</p>
       <div id="container-inputs">
-      <Input class="cadastro-input" @custom-change="this.nome = $event" type="text" placeholder="Nome" />
-      <Input class="cadastro-input" @custom-change="this.email = $event" type="email" placeholder="Email" />
-      <Input class="cadastro-input" @custom-change="this.telefone = $event" type="tel" placeholder="Telefone" />
-      <Input class="cadastro-input" @custom-change="this.endereco = $event" type="text" placeholder="Endereço" />
-      <Input class="cadastro-input" @custom-change="this.cpf = $event" type="number" placeholder="CPF" />
-      <Button @click="cadastrar()" text="Cadastrar"/>
+        <Input class="cadastro-input" @custom-change="this.nome = $event" type="text" placeholder="Nome" />
+        <Input class="cadastro-input" @custom-change="this.email = $event" type="email" placeholder="Email" />
+        <Input class="cadastro-input" @custom-change="this.telefone = $event" type="tel" placeholder="Telefone" />
+        <Input class="cadastro-input" @custom-change="this.endereco = $event" type="text" placeholder="Endereço" />
+        <Input class="cadastro-input" @custom-change="this.cpf = $event" type="number" placeholder="CPF" />
+        <Button @click="cadastrar()" text="Cadastrar"/>
+        <Message v-for="msg in displayMsg" :msg="msg.message"/>
       </div>
     </div>
 	</main>
@@ -80,10 +80,17 @@ export default {
       const res = await (await req).json()
 
       if(res.error){
-        return this.displayMsg = res.errors;
+        this.displayMsg = res.errors;
+        setTimeout(() => {
+          this.displayMsg = []
+        }, 4000)
+        return 
       }
 
-      this.$router.push({name: 'clientes', query: {mensagem: res.message}})
+      this.displayMsg.push({message: res.message})
+
+      setTimeout(() => {this.$router.push({name: 'clientes'})}, 2000)
+      
 
     }
   }

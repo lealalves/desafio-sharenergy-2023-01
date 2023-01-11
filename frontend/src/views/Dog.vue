@@ -4,9 +4,9 @@
       <Header />
       <h1>Random DOG</h1>
       <p>Aperte o botão para que apareça um cachorro aleatório!</p>
-      <Button @click="searchDog()" text="Refresh"/> 
-      <p v-show="!dogLoaded && dogImg !== ''">Carregando a foto do doguinho, calma!!</p>
-      <img @load="dogLoaded = true" v-show="dogImg" :src="dogImg" alt="Dog" id="dog_img">
+      <Button @click="searchDog()" text="Refresh"/>
+      <Message :msg="dogMsg" />
+      <img @load="dogMsg = ''" v-show="dogImg" :src="dogImg" alt="Dog" id="dog_img">
     </div>
 	</main>
 </template>
@@ -18,8 +18,15 @@
   width: 100vw;
   height: 100vh;
 }
+#container-dog p{
+  display: flex;
+  height: 20px;
+  margin-bottom: 5px;
+  text-align: center;
+}
 #container-dog img{
   width: min(600px, 90vw);
+  margin-top: 10px;
   border-radius: 10px;
 }
 #container-dog button{
@@ -30,25 +37,24 @@
 <script>
 import Header from '../components/Header/Header.vue'
 import Button from '../components/Button.vue'
+import Message from '../components/Message.vue'
 
 export default {
   name: 'Dog',
   components:{
     Header,
-    Button
+    Button,
+    Message
   },
   data(){
     return {
       dogImg: '',
-      dogLoaded: false
+      dogMsg: ''
     }
   },
   methods: {
-    teste(){
-      console.log('carrego');
-    },
     async searchDog(){
-      this.dogLoaded = false
+      this.dogMsg = 'Carregando a foto do doguinho, calma!!'
       const req = fetch('http://localhost:3000/services/randomdog')
       const res = await (await req).json()
 
